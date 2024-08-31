@@ -8,5 +8,8 @@ module.exports = defineConfig({
 
     },
   },
+  env: {
+    environment: 'qa2', // or 'qa2'
+  },
   
 });

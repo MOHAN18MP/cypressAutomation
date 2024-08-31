@@ -5,8 +5,29 @@
 //     })
 //   })
 
+
+import * as webActions from '../support/webAction';
+
+// import { exampleObject } from '../fixtures/example';
+
+
 describe('first test', function () {
+    before(function () {
+        // Define the testId you want to use
+        // const environment = Cypress.env('environment') || 'qa2'; 
+        const environment = Cypress.env('environment');
+        cy.log(`Current environment: ${environment}`);
+        this.testId = 'trstId-1';
+
+        // Load the fixture data and assign qa1 to a variable
+        cy.fixture('testData').then((data) => {
+            this.data = data[this.testId];
+            this.selectedData  = this.data[environment]; // Define qa1 in beforeEach
+        });
+    });
+
     it('First TEST', function () {
+        const findGrocery = this.selectedData.findGrocery;
         cy.visit("https://rahulshettyacademy.com/seleniumPractise/#/");
         cy.wait(2000)
         // cy.get('.search-keyword:visible').type('ca')
@@ -32,7 +53,7 @@ describe('first test', function () {
         // click on add card by finding element using its name
 
         // Step 1: Declare the CSS selector as a variable
-        const productlist = '.products:visible';
+        /* const productlist = '.products:visible';
         const indiproduct = '.product:visible';
         const productName = '.product-name:visible';
         const searchProd = '.search-keyword:visible';
@@ -46,7 +67,7 @@ describe('first test', function () {
         const anchtag = "a"
         const contry = 'Benin';
         const procedButton = 'Proceed';
-
+ */
 
         // Step 2: Use the CSS selector in Cypress commands
         // cy.get(productNameSelector).as('productname'); // Create an alias for the selector
@@ -56,7 +77,7 @@ describe('first test', function () {
         //         cy.log(element.text());
         //     });
         // });
-        cy.get(searchProd).type('ca')
+/*         cy.get(searchProd).type('ca')
         cy.wait(2000)
         cy.get(productlist).get(indiproduct).each(($e1, index, $list) => {
             const textel = $e1.find(productName).text()
@@ -75,13 +96,15 @@ describe('first test', function () {
         cy.wait(2000);
         // cy.contains('label', 'Agree to the').find('input[type="checkbox"]').check();
         cy.get('input[type="checkbox"]').check();
-        cy.contains(buttontag, procedButton).click();
+        cy.contains(buttontag, procedButton).click(); */
 
 
+        webActions.addProductToCart(findGrocery)
 
-
+        cy.wait(5000)
 
 
 
     })
+
 })
