@@ -9,7 +9,7 @@ module.exports = defineConfig({
     },
   },
   env: {
-    environment: 'qa2', // or 'qa2'
+    environment: 'qa1', // or 'qa2'
   },
   
 });
