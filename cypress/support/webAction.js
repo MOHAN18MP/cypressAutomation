@@ -61,7 +61,7 @@ export const preExtract_transaction_postExtract = () => {
 
 export const extractbefore = () => {
     // Extract the value before the transaction
-    cy.get('#sciOutPut').then((data) => {
+    cy.get(selectors.CalcuOut).then((data) => {
         
         let label = "valBefore";
         let value = data.text();

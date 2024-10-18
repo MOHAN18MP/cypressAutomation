@@ -14,5 +14,7 @@ export const selectors = {
     selectTag: 'select',
     anchorTag: 'a',
     country: 'Benin',
-    proceedButton: 'Proceed'
+    proceedButton: 'Proceed',
+    CalcuOut:"#sciOutPut"
+
 };

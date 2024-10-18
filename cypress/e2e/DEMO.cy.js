@@ -1,4 +1,5 @@
 import * as webActions from '../support/webAction';
+import envUrls from '../support/envUrls';
 
 const testId = 'trstId-1';
 const environment = Cypress.env('environment');
@@ -12,7 +13,7 @@ before(function () {
 
 describe('Calculator Test', () => {
   it('should correctly add two numbers', () => {
-    cy.visit('https://www.calculator.net/');
+    cy.visit(envUrls[environment].url2);
 
     // Get the current value of the output field and store it as an integer
      

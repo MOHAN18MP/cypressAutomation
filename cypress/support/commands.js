@@ -69,6 +69,14 @@ Cypress.Commands.add('getData', (key) => {
 });
 
 
+Cypress.Commands.add('getAllData', () => {
+  return cy.window().then((win) => {
+    // Retrieve the entire runtimeData object
+    return win.runtimeData || {};
+  });
+});
+
+
 // Cypress.Commands.add('retrieve', (key) => {
 //   cy.task('getData', key).then((value) => {
 //     //cy.log('Retrieved value: ' + value); // Log the retrieved value
