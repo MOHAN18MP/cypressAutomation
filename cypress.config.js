@@ -4,16 +4,15 @@ module.exports = defineConfig({
   e2e: {
     specPattern: "cypress/e2e/*.js",
     setupNodeEvents(on, config) {
-      // implement node event listeners here
-
+      // Register the HTML reporter
+      require('cypress-html-reporter').install(on);
     },
   },
   env: {
     environment: 'qa1', // or 'qa2'
-  }
-  
-  
+  },
 });
+
 
 /* 
 const { defineConfig } = require('cypress');
