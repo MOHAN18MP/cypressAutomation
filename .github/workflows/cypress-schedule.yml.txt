@@ -1,0 +1,33 @@
+name: Scheduled Cypress Tests
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Run every day at midnight UTC
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'  # Specify your Node.js version
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Run Cypress Tests in Headless Mode
+      run: npx cypress run --headless
+
+    - name: Generate HTML Report
+      run: npx cypress-html-reporter --reportDir cypress/results
+
+    - name: Upload HTML Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: cypress-report
+        path: cypress/results/*.html
