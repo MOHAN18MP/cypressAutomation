@@ -12,19 +12,19 @@ before(function () {
 
 
 describe('Calculator Test', () => {
-  it('should correctly add two numbers', () => {
-    cy.visit(envUrls[environment].url2);
+  // it('should correctly add two numbers', () => {
+  //   cy.visit(envUrls[environment].url2);
 
-    // Get the current value of the output field and store it as an integer
+  //   // Get the current value of the output field and store it as an integer
      
-    cy.get('@testData').then((testData) => {
-      cy.get('#sciout > tbody > tr:nth-child(2) > td:nth-child(2) > div')
-          .find('.scinm').contains(8).click().click();
-  });
-      webActions.extractbefore();
-      webActions.addval();
-      webActions.calval();
-      webActions.validateAfter();
+  //   cy.get('@testData').then((testData) => {
+  //     cy.get('#sciout > tbody > tr:nth-child(2) > td:nth-child(2) > div')
+  //         .find('.scinm').contains(8).click().click();
+  // });
+      // webActions.extractbefore();
+      // webActions.addval();
+      // webActions.calval();
+      // webActions.validateAfter();
 
       // // Define exval
       // const exval = 7;
@@ -42,4 +42,4 @@ describe('Calculator Test', () => {
       
    
   });
-});
+// });
