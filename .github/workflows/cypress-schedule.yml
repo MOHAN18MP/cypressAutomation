@@ -24,8 +24,8 @@ jobs:
     - name: Run Cypress Tests in Headless Mode
       run: npx cypress run --headless
 
-    - name: Generate HTML Report
-      run: npx cypress-html-reporter --reportDir cypress/results
+    # - name: Generate HTML Report
+    #   run: npx cypress-html-reporter --reportDir cypress/results
 
     - name: Upload HTML Report
       uses: actions/upload-artifact@v4

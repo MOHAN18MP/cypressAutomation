@@ -15,6 +15,25 @@ module.exports = defineConfig({
   
 });
 
+// const { defineConfig } = require("cypress");
+
+// module.exports = defineConfig({
+//   e2e: {
+//     specPattern: "cypress/e2e/*.js",
+//     reporter: "cypress-html-reporter",
+//     reporterOptions: {
+//       html: true,
+//       overwrite: false,
+//       toConsole: true,
+//     },
+//   },
+//   env: {
+//     environment: 'qa1', // or 'qa2'
+//   },
+// });
+
+
+
 /* 
 const { defineConfig } = require('cypress');
 const fs = require('fs'); // Required to work with the file system
