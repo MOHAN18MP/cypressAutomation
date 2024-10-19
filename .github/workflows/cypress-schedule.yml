@@ -22,7 +22,7 @@ jobs:
       run: npm install
 
     - name: Run Cypress Tests in Headless Mode
-      run: DEBUG=cypress:* npx cypress run --headless
+      run: npx cypress run --headless
 
     - name: Generate HTML Report
       run: npx cypress-html-reporter --reportDir cypress/results
