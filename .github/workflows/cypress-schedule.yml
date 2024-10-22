@@ -25,7 +25,7 @@ jobs:
       run: npx cypress run --headless
 
     - name: Generate HTML Report  # Generates Mochawesome HTML report
-      run: npx mochawesome-merge cypress/reports/*.json > cypress/reports/merged-report.json && npx marge cypress/reports/merged-report.json --reportDir cypress/reports --inline
+      run: npm install mochawesome cypress-mochawesome-reporter --save-dev
 
     - name: Upload HTML Report
       uses: actions/upload-artifact@v4
