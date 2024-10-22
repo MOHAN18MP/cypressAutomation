@@ -3,17 +3,31 @@ const { defineConfig } = require("cypress");
 module.exports = defineConfig({
   e2e: {
     specPattern: "cypress/e2e/*.js",
+    
+    // Enable Mochawesome reporter
+    reporter: 'cypress-mochawesome-reporter',
+    reporterOptions: {
+      reportDir: 'cypress/reports', // Directory for reports
+      reportFilename: '[status]_[datetime]-test-report', // Custom naming for reports
+      overwrite: false,  // Do not overwrite reports on each run
+      html: true,  // Generate HTML report
+      json: true,  // Generate JSON report for later merging
+      timestamp: 'short' // Adds timestamp for better report organization
+    },
+    
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      // Implement Mochawesome plugin to enable reporting
+      require('cypress-mochawesome-reporter/plugin')(on);
 
+      // Additional node event listeners can be added here
     },
   },
+
   env: {
     environment: 'qa1', // or 'qa2'
   }
-  
-  
 });
+
 
 // const { defineConfig } = require("cypress");
 

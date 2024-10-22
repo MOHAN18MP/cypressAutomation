@@ -1,4 +1,4 @@
-name: Scheduled Cypress Tests
+name: Scheduled Cypress Tests  # Updated workflow name
 
 on:
   schedule:
@@ -24,11 +24,11 @@ jobs:
     - name: Run Cypress Tests in Headless Mode
       run: npx cypress run --headless
 
-    # - name: Generate HTML Report
-    #   run: npx cypress-html-reporter --reportDir cypress/results
+    - name: Generate HTML Report  # Generates Mochawesome HTML report
+      run: npx mochawesome-merge cypress/reports/*.json > cypress/reports/merged-report.json && npx marge cypress/reports/merged-report.json --reportDir cypress/reports --inline
 
     - name: Upload HTML Report
       uses: actions/upload-artifact@v4
       with:
         name: cypress-report
-        path: cypress/results/*.html
+        path: cypress/reports/*.html  # Upload the generated HTML report
