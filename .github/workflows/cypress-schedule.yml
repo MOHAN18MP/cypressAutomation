@@ -1,4 +1,4 @@
-name: Scheduled Cypress Tests  # Updated workflow name
+name: Cypress Tests with Direct HTML Report
 
 on:
   schedule:
@@ -24,11 +24,8 @@ jobs:
     - name: Run Cypress Tests in Headless Mode
       run: npx cypress run --headless
 
-    - name: Generate HTML Report  # Generates an HTML report per test run
-      run: npx marge cypress/reports/*.json --reportDir cypress/reports --inline
-
     - name: Upload HTML Report
       uses: actions/upload-artifact@v4
       with:
         name: cypress-report
-        path: cypress/reports/*.html  # Upload each generated HTML report
+        path: cypress/reports/*.html  # Upload the generated HTML report
