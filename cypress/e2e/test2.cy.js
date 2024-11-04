@@ -8,7 +8,7 @@ before(function () {
     cy.fixture('testData').then((data) => { cy.wrap(data[testId][environment]).as('testData'); });
 });
 
-describe(testId, () => {
+describe(testId+'_'+environment, () => {
 
     it('First TEST', () => {
         cy.log(environment);

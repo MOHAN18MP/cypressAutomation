@@ -5,7 +5,7 @@
 //     })
 //   })
 
-describe('first test', function () {
+describe("testId", () => {
     it('First TEST', function () {
         cy.visit("https://rahulshettyacademy.com/seleniumPractise/#/");
         cy.wait(2000)
