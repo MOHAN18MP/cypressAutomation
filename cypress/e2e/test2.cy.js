@@ -1,7 +1,7 @@
 import * as webActions from '../support/webAction';
 
 const testId = 'trstId-1';
-const environment = Cypress.env('environment');
+const environment = "qa2";//Cypress.env('environment');
 
 before(function () {
     // Load the test data and set it as an alias
