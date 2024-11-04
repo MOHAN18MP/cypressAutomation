@@ -1,4 +1,4 @@
-name: Scheduled Cypress Tests  # Updated workflow name
+name: Cypress Tests with Direct HTML Report
 
 on:
   schedule:
@@ -23,9 +23,6 @@ jobs:
 
     - name: Run Cypress Tests in Headless Mode
       run: npx cypress run --headless
-
-    - name: Generate HTML Report  # Generates Mochawesome HTML report
-      run: npm install mochawesome cypress-mochawesome-reporter --save-dev
 
     - name: Upload HTML Report
       uses: actions/upload-artifact@v4
