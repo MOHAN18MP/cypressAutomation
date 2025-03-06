@@ -1,4 +1,4 @@
-const { defineConfig } = require("cypress");
+/* const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   e2e: {
@@ -26,7 +26,43 @@ module.exports = defineConfig({
   env: {
     environment: 'qa1'|| 'qa2'
   }
+}); */
+
+const fs = require('fs');
+const path = require('path');
+const { defineConfig } = require('cypress');
+
+module.exports = defineConfig({
+  reporter: 'cypress-mochawesome-reporter',
+  reporterOptions: {
+    charts: true,
+    reportPageTitle: 'custom-title',
+    embeddedScreenshots: true,
+    inlineAssets: true,
+    saveAllAttempts: false,
+  },
+  e2e: {
+    testIsolation: false,
+    specPattern: 'cypress/e2e/*.js', // Your test files pattern
+
+    // Enable Mochawesome reporter
+
+
+    // Setting up Node Events for Custom Tasks
+    setupNodeEvents(on, config) {
+      // Implement Mochawesome plugin to enable reporting
+      require('cypress-mochawesome-reporter/plugin')(on);
+    },
+  },
+
+  env: {
+    environment: 'qa1' || 'qa2', // Environment variable, can switch between qa1/qa2
+  },
 });
+
+
+
+
 
 
 // const { defineConfig } = require("cypress");

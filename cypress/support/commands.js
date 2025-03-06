@@ -61,6 +61,40 @@ Cypress.Commands.add('setData', (key, value) => {
   });
 });
 
+// Cypress.Commands.add('Get', (inst) => {
+//   cy.log(inst.description);
+//   if (inst.delay) cy.wait(inst.delay);
+//   return inst.assertion ?
+//       inst.postDelay ? cy.get(inst.selector, inst.options).should(inst.assertion, inst.assertionValue).wait(inst.postDelay) :
+//           cy.get(inst.selector, inst.options).should(inst.assertion, inst.assertionValue) :
+//       inst.postDelay ? cy.get(inst.selector).wait(inst.postDelay) :
+//           cy.get(inst.selector);
+// });
+
+
+Cypress.Commands.add('Get', (inst) => {
+  cy.log(inst.description);
+  if (inst.delay) cy.wait(inst.delay);
+  
+  const command = inst.assertion ?
+      inst.postDelay ? cy.get(inst.selector, inst.options).should(inst.assertion, inst.assertionValue).wait(inst.postDelay) :
+          cy.get(inst.selector, inst.options).should(inst.assertion, inst.assertionValue) :
+      inst.postDelay ? cy.get(inst.selector).wait(inst.postDelay) :
+          cy.get(inst.selector);
+  
+  return command.then(
+      () => {
+          // Success callback: Do nothing
+      },
+      (error) => {
+          // Failure callback: Log the error with the description
+          cy.log(`Error occurred: ${error.message}`);
+          cy.log(`Description: ${inst.description}`);
+          throw error; // Rethrow the error to fail the test
+      }
+  );
+});
+
 Cypress.Commands.add('getData', (key) => {
   return cy.window().then((win) => {
     // Retrieve the data
@@ -75,6 +109,18 @@ Cypress.Commands.add('getAllData', () => {
     return win.runtimeData || {};
   });
 });
+
+Cypress.Commands.add('launchAndWaitForSpinner', (url, spinnerSelector = null) => {
+  // Visit the URL
+  cy.visit(url);
+
+  // If spinnerSelector is provided, wait until the spinner disappears
+  if (spinnerSelector) {
+      cy.get(spinnerSelector).should('not.exist');
+  }
+});
+
+
 
 
 // Cypress.Commands.add('retrieve', (key) => {
@@ -100,6 +146,16 @@ Cypress.Commands.add('validateWebText', (selector, expectedValue) => {
     .then((text) => {
       const trimmedText = text.trim(); // Trim the extracted text
       expect(trimmedText).to.equal(expectedValue); // Validate the trimmed text
+    });
+});
+
+
+Cypress.Commands.add('validateWebTextContains', (selector, expectedValue) => {
+  cy.get(selector)
+    .invoke('text')
+    .then((text) => {
+      const trimmedText = text.trim(); // Trim the extracted text
+      expect(trimmedText).to.include(expectedValue); // Validate the trimmed text
     });
 });
 
@@ -149,3 +205,38 @@ Cypress.Commands.add('compareNumValuesBeforeAndAfter', (selector, transactionAct
         });
     });
 });
+
+
+Cypress.Commands.add('isElementVisible', (element) => {
+  cy.get('body').then($body => {
+      if ($body.find(element).length) {
+          return true
+      } else {
+          return false
+      }
+  })
+})
+
+
+Cypress.Commands.add('waitForText', (selector, expectedText, retryDelay = 600, maxRetries = 10) => {
+  let retries = 0;
+
+  function checkText() {
+    cy.get(selector, { timeout: retryDelay * maxRetries }).then(($el) => {
+      if ($el.length === 0) {
+        throw new Error(`Element with selector "${selector}" not found`);
+      }
+      if ($el.text().trim() !== expectedText && retries < maxRetries) {
+        retries++;
+        cy.wait(retryDelay); // Wait before retrying
+        checkText(); // Retry the check
+      } else {
+        expect($el.text().trim()).to.eq(expectedText);
+      }
+    });
+  }
+
+  checkText();
+});
+
+

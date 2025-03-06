@@ -1,9 +1,9 @@
 // cypress/support/constants.js or cypress/support/constants.ts
 
 export const selectors = {
-    productList: '.products:visible',
-    indiProduct: '.product:visible',
-    productName: '.product-name:visible',
+    productList: '.products',
+    indiProduct: '.product',
+    productName: '.product-name',
     searchProd: '.search-keyword:visible',
     findGrocery: 'Cashew',
     addButton: 'ADD TO CART',
@@ -17,4 +17,16 @@ export const selectors = {
     proceedButton: 'Proceed',
     CalcuOut:"#sciOutPut"
 
-};
+}
+export const grocyHomepageSel= { 
+    productName: ".product-name" ,
+    product:".product",
+    addCart:"button",
+    topDeals:'[href="#/offers"]',
+    addCartButton:'.product-action > button',
+    proceedtoCOButton:'.action-block > button:visible',
+    serachButton:".search-button",
+    cartElem:".cart-preview.active",
+    productNameInCart:'.cart-items .cart-item .product-name:visible'
+}
+

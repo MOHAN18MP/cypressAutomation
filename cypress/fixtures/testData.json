@@ -1,18 +1,44 @@
 {
   "trstId-1": {
-    "qa1":{
+    "qa1": {
       "name": "Using fixtures to represent data",
       "email": "hello@cypress.io",
       "body": "Fixtures are a great way to mock data for responses to routes",
-      "findGrocery": "Cashew",
-      "exval":"7"
+      "findGrocery": {
+        "iteam1": "Cashews"
+      },
+      "exval": "7"
     },
-    "qa2":{
+    "qa2": {
       "name": "Using fixtures to represent data",
       "email": "hello@cypress.io",
       "body": "Fixtures are a great way to mock data for responses to routes",
-      "findGrocery": "Brocolli",
-      "exval":"7"
+      "findGrocery": {
+        "iteam1": "brocllie"
+      },
+      "exval": "7"
+    }
+  },
+  "trstId-2": {
+    "qa1": {
+      "name": "Using fixtures to represent data",
+      "email": "hello@cypress.io",
+      "body": "Fixtures are a great way to mock data for responses to routes",
+      "findGrocery": {
+        "iteam1": "Cashews",
+        "iteam2":"straber",
+        "iteam3":"Walnuts"
+      },
+      "exval": "7"
+    },
+    "qa2": {
+      "name": "Using fixtures to represent data",
+      "email": "hello@cypress.io",
+      "body": "Fixtures are a great way to mock data for responses to routes",
+      "findGrocery": {
+        "iteam1": "Cashews"
+      },
+      "exval": "7"
     }
   }
 }
