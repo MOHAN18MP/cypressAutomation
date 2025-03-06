@@ -1,5 +1,7 @@
 const fs = require('fs');
 const path = require('path');
+const dayjs = require('dayjs');  // Install dayjs: npm install dayjs
+const formattedDate = dayjs().format('YYYY-MM-DD_HH-mm-ss');
 const { defineConfig } = require('cypress');
 const { cleanupReports } = require('./reportCleanup');
 
@@ -11,7 +13,7 @@ module.exports = defineConfig({
   reporterOptions: {
     charts: true,
     reportPageTitle: 'custom-title',
-    reportFilename: '[status]_[datetime]-test-report',
+    reportFilename: '[status]_${formattedDate}-test-report',
     embeddedScreenshots: true,
     overwrite: false, 
     inlineAssets: true,
