@@ -36,7 +36,9 @@
       "email": "hello@cypress.io",
       "body": "Fixtures are a great way to mock data for responses to routes",
       "findGrocery": {
-        "iteam1": "Cashews"
+        "iteam1": "Cashews",
+        "iteam2":"straber",
+        "iteam3":"Walnuts"
       },
       "exval": "7"
     }

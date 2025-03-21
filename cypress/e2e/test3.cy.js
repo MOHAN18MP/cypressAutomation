@@ -1,27 +1,39 @@
-import ShoppingPage  from '../support/web';
+import grocHomePage from '../POM/grocHomePage';
+import '../support/hooks'; // Ensure hooks are imported
 
-const testId = 'trstId-1';
+const testId = 'trstId-2';
 const environment = Cypress.env('environment');
-let SP;
 
-before(function () {
-    // Load the test data and set it as an alias
-    cy.fixture('testData').then((data) => { cy.wrap(data[testId][environment]).as('testData'); });
-    SP = new ShoppingPage();
+describe(`${testId}_${environment}`, () => {
+
+  it('Launch URL', { retries: { runMode: 2, openMode: 2 } }, () => {
+    cy.get('@homePage').then((hp) => {
+      hp.launch();
+    });
+  });
+
+  it('add groc without search and ignore test data iteam if not found', { retries: { runMode: 0, openMode: 0 } }, () => {
+    cy.get('@homePage').then((hp) => {
+      hp.addGrocToCartIgnoreIteam();
+    });
+  });
+
+  it('open Cart', { retries: { runMode: 0, openMode: 0 } }, () => {
+    cy.get('@homePage').then((hp) => {
+      hp.openCart();;
+    });
+  });
+
+  it('Validate Cart', { retries: { runMode: 0, openMode: 0 } }, () => {
+    cy.get('@homePage').then((hp) => {
+        hp.validateCartLoop();
+    });
+  });
+
+//   it('Validate Cart', { retries: { runMode: 0, openMode: 0 } }, () => {
+//     cy.get('@homePage').then((hp) => {
+//       hp.validateCart();
+//     });
+//   });
 
 });
-
-describe(testId+'_'+environment, () => {
-
-    it('First TEST',  () => {
-        cy.log(environment);
-        SP.launch();
-        cy.wait(2000)
-        SP.enterGroc()
-        cy.wait(5000)
-
-
-
-    })
-
-})

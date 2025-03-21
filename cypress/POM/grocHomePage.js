@@ -28,7 +28,7 @@ class grocHomePage {
 
   searchGroc() {
     return cy.Get({
-      description: `Entering grocery: ${this.testData.productName}`,
+      description: `searchGroc method`,
       selector: selectors.searchProd,
       assertion: "be.visible",
       assertionValue: "",
@@ -68,6 +68,72 @@ class grocHomePage {
     }).validateWebTextContains(grocyHomepageSel.productNameInCart,this.testData.findGrocery.iteam1);
     
   }
+
+  validateCartpm(param) {
+    cy.waitForText(grocyHomepageSel.proceedtoCOButton, "PROCEED TO CHECKOUT");
+  
+    return cy.Get({
+      description: `Validate cart: '${grocyHomepageSel.cartElem}'`,
+      selector: grocyHomepageSel.cartElem,
+      assertion: "be.visible",
+      assertionValue: "",
+    }).validateWebTextContains(grocyHomepageSel.productNameInCart,param);
+    
+  }
+
+  validateCartLoop() {
+    cy.waitForText(grocyHomepageSel.proceedtoCOButton, "PROCEED TO CHECKOUT");
+
+    return cy.Get({
+        description: `Validate cart: '${grocyHomepageSel.cartElem}'`,
+        selector: grocyHomepageSel.cartElem,
+        assertion: "be.visible",
+        assertionValue: "",
+    }).then(() => {
+        // Convert object values into an array
+        const groceryItems = Object.values(this.testData.findGrocery);
+
+        groceryItems.forEach((product) => {
+            cy.validateWebTextContains(grocyHomepageSel.productNameInCart, product);
+        });
+    });
+}
+
+
+
+//   validateCart() {
+//     cy.waitForText(grocyHomepageSel.proceedtoCOButton, "PROCEED TO CHECKOUT");
+
+//     return cy.Get({
+//         description: `Validate cart: '${grocyHomepageSel.cartElem}'`,
+//         selector: grocyHomepageSel.cartElem,
+//         assertion: "be.visible",
+//         assertionValue: "",
+//     })
+//     .validateWebTextContains(grocyHomepageSel.productNameInCart, this.testData.findGrocery.iteam1)
+//     .validateWebTextContains(grocyHomepageSel.productNameInCart1, this.testData.findGrocery.iteam2)
+//     .validateWebTextContains(grocyHomepageSel.productNameInCart2, this.testData.findGrocery.iteam3);
+// }
+
+
+
+extractbeforeadd(){
+  cy.extractText('.product > .product-name','fn');
+}
+
+valExtract(){
+  cy.getData('fn').then((fn) => {
+    this.validateCartpm(fn);
+
+  })
+}
+
+valExtractpm(pm){
+  cy.getData(pm).then((fn) => {
+    this.validateCartpm(fn);
+
+  })
+}
   
 
   addGroctoCart() {
@@ -100,7 +166,7 @@ class grocHomePage {
 
   addGrocToCartIgnoreIteam() {
 
-    cy.waitForText(grocyHomepage.addCartButton, "ADD TO CART");
+    cy.waitForText(grocyHomepageSel.addCartButton, "ADD TO CART");
     const groceries = this.testData.findGrocery;
     const groceryKeys = Object.keys(groceries);
 
@@ -108,7 +174,7 @@ class grocHomePage {
       const grocery = groceries[key];
       let stopLoop = false;
 
-      //cy.wait(5000); // Ensure the page is ready before interacting
+      cy.wait(5000); // Ensure the page is ready before interacting
 
       return cy.Get({
         description: `Entering grocery: ${this.testData.productName}`,

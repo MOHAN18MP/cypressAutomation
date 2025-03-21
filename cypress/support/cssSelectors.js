@@ -23,7 +23,7 @@ export const grocyHomepageSel= {
     product:".product",
     addCart:"button",
     topDeals:'[href="#/offers"]',
-    addCartButton:'.product-action > button',
+    addCartButton:':nth-child(1) > .product-action > button',
     proceedtoCOButton:'.action-block > button:visible',
     serachButton:".search-button",
     cartElem:".cart-preview.active",

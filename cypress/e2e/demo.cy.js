@@ -1,15 +1,69 @@
-describe('Validate Cart Item', () => {
-    it('should validate that Cucumber - 1 Kg is in the cart', () => {
-      // Ensure the cart preview is visible
-      cy.visit("https://rahulshettyacademy.com/seleniumPractise/#/");
-      
-      cy.get(':nth-child(1) > .product-action > button').click();
-
-      cy.get('.cart-icon > img').click();
-      cy.get('.cart-preview.active').should('be.visible');
+// describe('Google Search - Mock API Response', () => {
   
-      // Find the product name within the cart and validate its text
-      cy.get('.cart-items .cart-item .product-name')
-        .should('contain.text', 'Cucumber - 1 Kg');
-    });
+//   it('Searches for "games" and mocks API response', () => {
+//     // Intercept Google search API response
+//     cy.intercept('GET', '**/search?*q=games*', {
+//       statusCode: 200,
+//       body: {
+//         searchResults: [
+//           { title: 'Top 10 Online Games', link: 'https://games.com/top10' },
+//           { title: 'Best Free PC Games', link: 'https://games.com/free-pc' },
+//         ],
+//       },
+//     }).as('mockSearch');
+
+//     // Visit Google
+//     cy.visit('https://www.google.com');
+
+//     // Type "games" in the search bar and press Enter
+//     cy.get('#APjFqb').type('games{enter}');
+
+//     // Wait for the mocked response
+//     cy.wait('@mockSearch');
+
+//     // Verify mocked data appears in UI (Modify selector if needed)
+//     cy.contains('Top 10 Online Games').should('be.visible');
+//     cy.contains('Best Free PC Games').should('be.visible');
+//   });
+
+// });
+
+// describe('Monitor API Response for Google Search', () => {
+  
+//   it('Intercepts and monitors API response after searching "games"', () => {
+//     // Intercept the search API response and monitor its details
+//     cy.intercept('GET', '**/search?*q=games*').as('searchRequest');
+
+//     // Visit Google
+//     cy.visit('https://www.google.com');
+
+//     // Type "games" in the search bar and press Enter
+//     cy.get('#APjFqb').type('games{enter}');
+
+//     // Wait for the search API response
+//     cy.wait('@searchRequest').then((interception) => {
+//       // Log the intercepted request and response
+//       cy.log('Intercepted Request:', interception.request);
+//       cy.log('Intercepted Response:', interception.response);
+
+//       // Assert response status
+//       expect(interception.response.statusCode).to.eq(200);
+
+//       // Assert the response body contains expected data (modify based on actual API response)
+//       expect(interception.response.body).to.exist;
+//     });
+//   });
+
+// });
+describe('Webpage Load Test', () => {
+  it('Should load the webpage successfully', () => {
+    // Visit the webpage
+    cy.visit('https://google.com');
+
+    // Verify the status code is 200 (page loaded successfully)
+    cy.request('https://google.com').its('status').should('eq', 200);
+
+  
   });
+});
+

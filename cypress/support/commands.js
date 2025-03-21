@@ -40,6 +40,15 @@ const sanitizeForLogging = (input) => {
 };
 
 // Custom Cypress command to save key-value pair and log it
+
+
+Cypress.Commands.add('setupTestData', (testId, environment) => {
+  cy.fixture('testData').then((data) => {
+    cy.wrap(data[testId][environment]).as('testData');
+  });
+});
+
+
 Cypress.Commands.add('save', (key, value) => {
   const sanitizedKey = sanitizeForLogging(key);
   const sanitizedValue = sanitizeForLogging(value);
@@ -238,5 +247,17 @@ Cypress.Commands.add('waitForText', (selector, expectedText, retryDelay = 600, m
 
   checkText();
 });
+
+Cypress.Commands.add('extractText', (selector, labelName) => {
+  cy.get(selector).then((data) => {
+    let value = data.text();
+    cy.log("before val" +  value)
+    console.log("before val" +  value)
+    cy.setData(labelName, value);
+    });
+});
+
+
+
 
 
