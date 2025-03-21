@@ -78,6 +78,7 @@ class grocHomePage {
       assertion: "be.visible",
       assertionValue: "",
     }).validateWebTextContains(grocyHomepageSel.productNameInCart,param);
+      // .validateWebTextContains(grocyHomepageSel.productNameInCart,this.testData.findGrocery.iteam1);
     
   }
 
