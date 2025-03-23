@@ -116,10 +116,11 @@ class grocHomePage {
 //     .validateWebTextContains(grocyHomepageSel.productNameInCart2, this.testData.findGrocery.iteam3);
 // }
 
-
+aa
 
 extractbeforeadd(){
-  cy.extractText('.product > .product-name','fn');
+  cy.get(grocyHomepageSel.product).find(grocyHomepageSel.productName).should("have.length",1);
+  cy.extractText(grocyHomepageSel.productName,'fn');
 }
 
 valExtract(){

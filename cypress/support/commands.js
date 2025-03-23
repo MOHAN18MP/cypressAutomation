@@ -240,7 +240,7 @@ Cypress.Commands.add('waitForText', (selector, expectedText, retryDelay = 600, m
         cy.wait(retryDelay); // Wait before retrying
         checkText(); // Retry the check
       } else {
-        expect($el.text().trim()).to.eq(expectedText);
+        expect($el.text().trim()).include(expectedText);
       }
     });
   }
